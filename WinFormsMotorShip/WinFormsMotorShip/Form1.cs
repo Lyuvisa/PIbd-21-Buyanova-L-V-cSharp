@@ -12,13 +12,12 @@ namespace WinFormsMotorShip
 {
     public partial class FormMotorShip : Form
     {
-        private MotorShip Ship;
+        private ITransport Ship;
         public FormMotorShip()
         {
             InitializeComponent();
         }
 
-        /// Метод отрисовки парохода
         private void Draw()
         {
             Bitmap bmp = new Bitmap(pictureBoxMotorShip.Width, pictureBoxMotorShip.Height);
@@ -27,12 +26,11 @@ namespace WinFormsMotorShip
             pictureBoxMotorShip.Image = bmp;
         }
 
-        private void buttonCreate_Click(object sender, EventArgs e)
+        private void buttonCreateShip_Click(object sender, EventArgs e)
         {
             Random rnd = new Random();
-            Ship = new MotorShip();
-            Ship.Init(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.BurlyWood, Color.Gray, true, true, true, true); 
-            Ship.SetPosition(rnd.Next(10, 100),rnd.Next(10, 100), pictureBoxMotorShip.Width, pictureBoxMotorShip.Height);
+            Ship = new Ship(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.BurlyWood); 
+            Ship.SetPosition(50 + rnd.Next(10, 100), 50 + rnd.Next(10, 100), pictureBoxMotorShip.Width, pictureBoxMotorShip.Height);
             Draw();
         }
 
@@ -54,6 +52,14 @@ namespace WinFormsMotorShip
                     Ship.MoveTransport(Direction.Right);
                     break;
             }
+            Draw();
+        }
+
+        private void buttonCreateMotorShip_Click(object sender, EventArgs e)
+        {
+            Random rnd = new Random();
+            Ship = new MotorShip(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.BurlyWood, Color.Gray, true, true, true, true);
+            Ship.SetPosition(50 + rnd.Next(10, 100), 50 + rnd.Next(10, 100), pictureBoxMotorShip.Width, pictureBoxMotorShip.Height);
             Draw();
         }
     }

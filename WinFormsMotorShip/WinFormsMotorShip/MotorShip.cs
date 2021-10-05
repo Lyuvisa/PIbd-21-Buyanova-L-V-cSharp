@@ -7,53 +7,26 @@ using System.Drawing;
 
 namespace WinFormsMotorShip
 {
-    /// Класс отрисовки теплохода
-    class MotorShip
+    public class MotorShip : Ship
     {
-        /// Левая координата отрисовки теплохода
-        private float _startPosX;
-
-        /// Правая кооридната отрисовки теплохода
-        private float _startPosY;
-
-        /// Ширина окна отрисовки
-        private int _pictureWidth;
-
-        /// Высота окна отрисовки
-        private int _pictureHeight;
-
-        /// Ширина отрисовки теплохода
-        private readonly int MotorShipWidth = 250;
-
-        /// Высота отрисовки теплохода
-        private readonly int MotorShipHeight = 100;
-
-        /// Максимальная скорость
-        public int MaxSpeed { private set; get; }
-
-        /// Вес теплохода
-        public int Weight { private set; get; }
-
-        /// Основной цвет теплохода
-        public Color MainColor { private set; get; }
-
-        /// Дополнительный цвет
         public Color DopColor { private set; get; }
 
         /// Признак наличия дополнительного этажа
         public bool DopFloor { private set; get; }
 
-        /// Признак кабин
+        /// Признак наличия окон в кабинах
         public bool CabinWindows { private set; get; }
 
-        /// Признак наличие Труб
+        /// Признак наличиz Труб
         public bool CabinsMotorShip { private set; get; }
 
-        /// Признак наличия флага
+        /// Признак налич флага
         public bool DecorFlag { private set; get; }
 
-        public void Init(int maxSpeed, int weight, Color mainColor, Color dopColor,
-        bool dopFloor, bool cabinWindows, bool cabinsMotorShip, bool decorFlag)
+        public MotorShip(int maxSpeed, float weight, Color mainColor, Color dopColor,
+        bool dopFloor, bool cabinWindows, bool cabinsMotorShip, bool decorFlag) :
+            base(maxSpeed, weight, mainColor, 250, 100)
+
         {
             MaxSpeed = maxSpeed;
             Weight = weight;
@@ -65,87 +38,17 @@ namespace WinFormsMotorShip
             CabinsMotorShip = cabinsMotorShip;
             DecorFlag = decorFlag;
         }
-        public void SetPosition(int x, int y, int width, int height)
-        {
-            _startPosX = x;
-            _startPosY = y;
 
-            _pictureHeight = height;
-            _pictureWidth = width;
-        }
-
-        public void MoveTransport(Direction direction)
+        public override void DrawTransport(Graphics g)
         {
-            int step = MaxSpeed * 150 / Weight;
-            switch (direction)
-            {
-                // вправо
-                case Direction.Right:
-                    if (_startPosX + step < _pictureWidth - MotorShipWidth)
-                    {
-                        _startPosX += step;
-                    }
-                    break;
-                //влево
-                case Direction.Left:
-                    if (_startPosX - step > 0)
-                    {
-                        _startPosX -= step;
-                    }
-                    break;
-                //вверх
-                case Direction.Up:
-                    if (_startPosY - step > 0)
-                    {
-                        _startPosY -= step;
-                    }
-                    break;
-                //вниз
-                case Direction.Down:
-                    if (_startPosY + step < _pictureHeight - MotorShipHeight)
-                    {
-                        _startPosY += step;
-                    }
-                    break;
-            }
-        }
+            base.DrawTransport(g);
 
-        public void DrawTransport(Graphics g)
-        {
             Pen pen = new Pen(Color.Black);
-            Brush br = new SolidBrush(MainColor);
             Brush brDopColor = new SolidBrush(DopColor);
             Brush brLightSalmon = new SolidBrush(Color.LightSalmon);
             Brush brWindows = new SolidBrush(Color.LavenderBlush);
             Brush brBrown = new SolidBrush(Color.Sienna);
-
-            //Корабль
-            PointF point1 = new PointF(_startPosX + 50, _startPosY + 50);
-            PointF point2 = new PointF(_startPosX + 100, _startPosY + 100);
-            PointF point3 = new PointF(_startPosX + 200, _startPosY + 100);
-            PointF point4 = new PointF(_startPosX + 250, _startPosY + 50);
-
-            PointF[] curvePoints =
-            {
-                 point1,
-                 point2,
-                 point3,
-                 point4
-            };
-
-            // Draw polygon to screen.
-            g.FillPolygon(br, curvePoints);
-            g.DrawPolygon(pen, curvePoints);
-
-            //Каюта
-            g.FillRectangle(br, _startPosX + 100, _startPosY + 10, 130, 40);
-            g.DrawRectangle(pen, _startPosX + 100, _startPosY + 10, 130, 40);
-
-            //Якорь
-            g.DrawLine(pen, _startPosX + 100, _startPosY + 60, _startPosX + 100, _startPosY + 80);
-            g.DrawLine(pen, _startPosX + 90, _startPosY + 70, _startPosX + 110, _startPosY + 70);
-            g.DrawLine(pen, _startPosX + 95, _startPosY + 80, _startPosX + 105, _startPosY + 80);
-
+            
             //Флаг
             if (DecorFlag)
             {
