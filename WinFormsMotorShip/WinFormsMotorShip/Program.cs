@@ -17,7 +17,7 @@ namespace WinFormsMotorShip
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormMotorShip());
+            Application.Run(new FormPier());
         }
     }
 }

@@ -18,6 +18,12 @@ namespace WinFormsMotorShip
             InitializeComponent();
         }
 
+        public void SetShip(ITransport Ship)
+        {
+            this.Ship = Ship;
+            Draw();
+        }
+
         private void Draw()
         {
             Bitmap bmp = new Bitmap(pictureBoxMotorShip.Width, pictureBoxMotorShip.Height);
@@ -30,7 +36,7 @@ namespace WinFormsMotorShip
         {
             Random rnd = new Random();
             Ship = new Ship(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.BurlyWood); 
-            Ship.SetPosition(50 + rnd.Next(10, 100), 50 + rnd.Next(10, 100), pictureBoxMotorShip.Width, pictureBoxMotorShip.Height);
+            Ship.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), pictureBoxMotorShip.Width, pictureBoxMotorShip.Height);
             Draw();
         }
 
@@ -54,7 +60,6 @@ namespace WinFormsMotorShip
             }
             Draw();
         }
-
         private void buttonCreateMotorShip_Click(object sender, EventArgs e)
         {
             Random rnd = new Random();
