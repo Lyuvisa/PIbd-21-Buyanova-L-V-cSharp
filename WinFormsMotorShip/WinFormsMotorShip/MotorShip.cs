@@ -17,7 +17,7 @@ namespace WinFormsMotorShip
         /// Признак наличия окон в кабинах
         public bool CabinWindows { private set; get; }
 
-        /// Признак наличиz Труб
+        /// Признак наличия Труб
         public bool CabinsMotorShip { private set; get; }
 
         /// Признак налич флага
@@ -26,7 +26,6 @@ namespace WinFormsMotorShip
         public MotorShip(int maxSpeed, float weight, Color mainColor, Color dopColor,
         bool dopFloor, bool cabinWindows, bool cabinsMotorShip, bool decorFlag) :
             base(maxSpeed, weight, mainColor, 250, 100)
-
         {
             MaxSpeed = maxSpeed;
             Weight = weight;
@@ -38,7 +37,6 @@ namespace WinFormsMotorShip
             CabinsMotorShip = cabinsMotorShip;
             DecorFlag = decorFlag;
         }
-
         public override void DrawTransport(Graphics g)
         {
             base.DrawTransport(g);
