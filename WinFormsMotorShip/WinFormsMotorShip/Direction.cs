@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WinFormsMotorShip
 {
-    enum Direction
+    public enum Direction
     {
         Up,
         Down,
